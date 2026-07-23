@@ -1,62 +1,97 @@
 # Olist Freight Pricing Engine
 
-A robust analytical engine for data-driven logistics and pricing strategies in the Brazilian e-commerce market. This project transforms raw e-commerce data into actionable insights for executive decision-making.
+Analytical project for freight pricing, delivery performance, and customer satisfaction in the Brazilian e-commerce market. The goal is to transform Olist order data into business insights that support logistics monitoring, seller management, and freight pricing decisions.
 
-## Problem Statement
+## Business Problem
 
-This project addresses two critical operational challenges in the Brazilian e-commerce sector:
+This project focuses on two operational challenges:
 
-1. **Logistics-Induced Customer Churn**: Late deliveries and inconsistent service levels from third-party sellers lead to customer dissatisfaction and churn.
-2. **Dynamic Freight Pricing**: The absence of a robust pricing model that adapts to market conditions can erode profit margins or alienate price-sensitive customers.
+1. **Logistics-driven customer dissatisfaction**: delayed deliveries and inconsistent seller performance can reduce customer satisfaction and increase churn risk.
+2. **Freight pricing decisions**: freight values need to reflect product, seller, customer, route, and delivery characteristics without damaging customer conversion.
 
-## Solution
+## Project Goals
 
-This repository develops a data-driven engine to solve these challenges by:
-
-- **Enforcing Service Level Agreements (SLAs)**: Providing statistical proof to monitor and enforce delivery commitments from third-party sellers.
-- **Implementing Robust Pricing Models**: Developing regression models to protect profit margins without sacrificing customer conversion.
-- **Bridging Analytics and Engineering**: Combining rigorous statistical analysis with modern software engineering to deliver a reliable and scalable solution.
+- Build a clean analytical base table for logistics and pricing analysis.
+- Monitor delivery service levels using order dates and estimated delivery dates.
+- Identify sellers, routes, states, and product categories associated with higher delay risk.
+- Understand how freight value varies by geography, product attributes, and order characteristics.
+- Prepare the data foundation for regression and prediction of freight value.
 
 ## Dataset
 
-The analysis is powered by the **Brazilian E-Commerce Public Dataset by Olist**, which contains over 100,000 real-world orders from 2016 to 2018. This rich, multidimensional dataset includes:
+The analysis uses the **Brazilian E-Commerce Public Dataset by Olist**, with real marketplace orders from 2016 to 2018. The processed analytical base includes:
 
-- Customer Demographics & Geolocation
-- Order Timestamps & Payment Methods
-- Product Attributes & Seller Profiles
-- Customer Satisfaction Reviews
+- Order and item identifiers
+- Seller and customer information
+- Product attributes
+- Payment information
+- Review scores
+- Delivery timestamps
+- Seller and customer geolocation
+- Freight and product prices
 
-## Project Architecture
+## Analytical Workflow
+
+The notebooks are organized as a progressive analysis pipeline:
+
+| Step | Notebook | Focus |
+| --- | --- | --- |
+| 1 | `01_eda_and_bi.ipynb` | Exploratory data analysis, data quality, descriptive summaries, BI-ready charts |
+| 2 | `02_data_distributions_and_sampling.ipynb` | Data distributions, variability, sampling, and sample-based reasoning |
+| 3 | `03_statistical_experiments_and_significance_tests.ipynb` | Statistical experiments, hypothesis testing, significance, and business interpretation |
+| 4 | `04_regression_and_prediction.ipynb` | Regression modeling, freight prediction, diagnostics, and prediction error analysis |
+
+The current active notebook is:
+
+```text
+notebooks/01_eda_and_bi.ipynb
+```
+
+## Repository Structure
 
 ```text
 ├── data/
-│   ├── raw/               # Immutable raw data from Olist (git-ignored)
-│   └── processed/         # Analytical Base Tables (ABT) for modeling (git-ignored)
-├── notebooks/             # Sequential experimental environment for analysis
-│   ├── 01_eda_and_bi.ipynb
-│   ├── 02_probability_and_simulation.ipynb
-│   ├── 03_statistical_inference.ipynb
-│   ├── 04_anova_and_adherence.ipynb
-│   └── 05_robust_regression.ipynb
-├── scr/                   # Production-ready code and Streamlit application
-│   └── app.py             # Main entry point for the interactive web dashboard
-├── assets/                # Static files (images, diagrams) for documentation
-├── .gitignore
-├── requirments.txt        # Application dependencies
-├── setup_env.sh           # Automated environment setup script
+│   ├── raw/                  # Raw Olist data, such as the SQLite source database
+│   └── processed/            # Processed analytical base tables
+│       └── olist_merged.parquet
+├── notebooks/                # Main analytical workflow
+│   └── 01_eda_and_bi.ipynb
+├── img/
+│   ├── plots/                # Figures exported from notebooks
+│   └── other/                # Diagrams and supporting images
+├── assets/                   # Static assets reserved for documentation or dashboard use
+├── scr/                      # Reserved for production code and Streamlit application
+├── setup_env.sh              # Environment setup script
+├── requirments.txt           # Python dependencies
+├── LICENSE
 └── README.md
+```
+
+## Figure Organization
+
+Notebook charts should be exported to:
+
+```text
+img/plots/
+```
+
+Supporting images, diagrams, and reference visuals should be stored in:
+
+```text
+img/other/
 ```
 
 ## Tech Stack
 
-- **Data Processing**: `PySpark` for distributed processing and `SQLite3` for initial data exploration.
-- **Numerical & Statistical Analysis**: `NumPy`, `Pandas`, `SciPy`, and `Statsmodels` for descriptive statistics, Monte Carlo simulations, hypothesis testing, and regression modeling.
-- **Data Visualization**: `Seaborn` and `Matplotlib` for EDA and diagnostics.
-- **Web Application**: `Streamlit` and `Plotly` for creating an interactive executive dashboard.
+- **Data processing**: `Pandas`, `NumPy`, `SQLite3`, `PySpark`
+- **Statistics and modeling**: `SciPy`, `Statsmodels`
+- **Visualization**: `Matplotlib`, `Seaborn`, `Plotly`
+- **Notebook environment**: `Jupyter`, `IPython Kernel`
+- **Dashboard layer**: `Streamlit` planned for interactive delivery
 
 ## Getting Started
 
-### Option 1 — Automated setup (recommended)
+### Automated setup
 
 ```bash
 git clone https://github.com/your-username/olist-freight-pricing-engine.git
@@ -65,7 +100,7 @@ bash setup_env.sh
 source .venv/bin/activate
 ```
 
-### Option 2 — Manual setup
+### Manual setup
 
 ```bash
 git clone https://github.com/your-username/olist-freight-pricing-engine.git
@@ -78,19 +113,27 @@ pip install --upgrade pip
 pip install -r requirments.txt
 ```
 
-### Running the project
+## Running the Analysis
 
-1. **Place the raw data**: Copy the Olist SQLite database into `data/raw/`.
-2. **Run the notebooks**: Execute the Jupyter notebooks in `notebooks/` in sequential order.
-3. **Launch the dashboard**:
-   ```bash
-   streamlit run scr/app.py
-   ```
+1. Place the raw Olist SQLite database in `data/raw/` if the processed table needs to be rebuilt.
+2. Use `data/processed/olist_merged.parquet` as the main analytical base table.
+3. Run the notebooks sequentially according to the analytical workflow.
+4. Save generated charts under `img/plots/`.
 
-## Key Findings & Business Impact
+## Expected Outputs
 
-The models and analyses in this project provide a clear framework for:
+- Data quality assessment of the analytical base table.
+- Delivery SLA and delay indicators.
+- Freight, seller, customer, product, and route-level summaries.
+- Statistical evidence for business hypotheses.
+- Regression-ready dataset for freight value prediction.
+- Visual outputs that can later feed a Streamlit dashboard.
 
-- **Reducing Churn**: Identifying underperforming sellers and enforcing SLAs to improve customer retention.
-- **Optimizing Pricing**: Implementing a dynamic pricing strategy that balances profitability and customer acquisition costs.
-- **Data-Driven Decisions**: Empowering leadership with an interactive dashboard to explore data and validate business hypotheses in real-time.
+## Business Impact
+
+This project supports:
+
+- **SLA monitoring**: identify late deliveries and underperforming sellers.
+- **Customer satisfaction analysis**: evaluate how delivery performance relates to review scores.
+- **Freight pricing intelligence**: understand the main drivers of freight value.
+- **Prediction readiness**: structure the data for robust freight value modeling.
