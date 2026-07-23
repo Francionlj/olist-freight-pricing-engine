@@ -1,4 +1,21 @@
-# Olist Freight Pricing Engine
+
+<div align="center">
+  <h1>Olist Freight Pricing Engine</h1>
+
+  <p>
+    Freight pricing, delivery performance, and customer satisfaction analysis for Brazilian e-commerce data.
+  </p>
+
+  [![Project Status](https://img.shields.io/badge/Status-In%20progress-2E8B57?style=for-the-badge)](https://github.com/Francionlj/olist-freight-pricing-engine)
+  [![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+  [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
+  [![Dataset](https://img.shields.io/badge/Dataset-Olist%20Public%20Dataset-6C63FF?style=for-the-badge)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+  [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+</div>
+
+---
+
+## Overview
 
 Analytical project for freight pricing, delivery performance, and customer satisfaction in the Brazilian e-commerce market. The goal is to transform Olist order data into business insights that support logistics monitoring, seller management, and freight pricing decisions.
 
@@ -94,7 +111,7 @@ img/other/
 ### Automated setup
 
 ```bash
-git clone https://github.com/your-username/olist-freight-pricing-engine.git
+git clone https://github.com/Francionlj/olist-freight-pricing-engine.git
 cd olist-freight-pricing-engine
 bash setup_env.sh
 source .venv/bin/activate
@@ -103,7 +120,7 @@ source .venv/bin/activate
 ### Manual setup
 
 ```bash
-git clone https://github.com/your-username/olist-freight-pricing-engine.git
+git clone https://github.com/Francionlj/olist-freight-pricing-engine.git
 cd olist-freight-pricing-engine
 
 python3 -m venv .venv
